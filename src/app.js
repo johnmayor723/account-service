@@ -4,6 +4,7 @@ const express = require("express");
 
 const routes = require("./routes");
 
+const requestLogger = require("./middleware/request-logger.middleware");
 const notFoundMiddleware = require("./middleware/not-found.middleware");
 const errorHandler = require("./middleware/error-handler.middleware");
 
@@ -15,15 +16,23 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+/**
+ * Log every request.
+ */
+app.use(requestLogger);
+
+/**
+ * Register application routes.
+ */
 app.use(routes);
 
 /**
- * Must come after all routes.
+ * Unknown routes.
  */
 app.use(notFoundMiddleware);
 
 /**
- * Must always be the last middleware.
+ * Global error handler.
  */
 app.use(errorHandler);
 
