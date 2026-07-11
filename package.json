@@ -1,14 +1,46 @@
 {
   "name": "banking-platform-template",
   "version": "1.0.0",
-  "main": "index.js",
+ 
+  "main": "src/server.js",
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
   },
-  "keywords": [],
+  "keywords": [
+    "banking",
+    "express",
+    "mongodb",
+    "microservice",
+    "fineract"
+  ],
   "author": "",
   "license": "ISC",
   "description": "",
+   "_moduleAliases": {
+    "@config": "src/config",
+    "@controllers": "src/controllers",
+    "@services": "src/services",
+    "@repositories": "src/repositories",
+    "@middleware": "src/middleware",
+    "@models": "src/models",
+    "@validators": "src/validators",
+    "@utils": "src/utils",
+    "@helpers": "src/helpers",
+    "@security": "src/security",
+    "@responses": "src/responses",
+    "@errors": "src/errors",
+    "@clients": "src/clients",
+    "@integrations": "src/integrations",
+    "@constants": "src/constants"
+  },
   "dependencies": {
     "argon2": "^0.44.0",
     "axios": "^1.18.1",
