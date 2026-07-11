@@ -1,9 +1,16 @@
 const app = require("./app");
 
-const config = require("./config/app.config");
+const { app: appConfig } = require("./config");
 
-app.listen(config.port, () => {
-    console.log(
-        `${config.serviceName} running on port ${config.port}`
-    );
+app.listen(appConfig.port, () => {
+    console.log("");
+
+    console.log("========================================");
+    console.log(`${appConfig.serviceName}`);
+    console.log("========================================");
+    console.log(`Environment : ${appConfig.environment}`);
+    console.log(`Port        : ${appConfig.port}`);
+    console.log(`Version     : ${appConfig.version}`);
+    console.log("========================================");
+    console.log("");
 });

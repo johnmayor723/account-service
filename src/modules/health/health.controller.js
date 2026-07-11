@@ -1,16 +1,14 @@
-const config = require("../../config/app.config");
+const { app } = require("../../config");
+
+const { success } = require("../../responses/api.response");
 
 const health = async (req, res) => {
-    return res.status(200).json({
-        success: true,
+    return success(res, {
         message: "Service is healthy.",
         data: {
-            service: config.serviceName,
-            version: config.version,
-            environment: config.environment
-        },
-        meta: {
-            timestamp: new Date().toISOString()
+            service: app.serviceName,
+            version: app.version,
+            environment: app.environment
         }
     });
 };
