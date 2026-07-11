@@ -1,16 +1,17 @@
 const app = require("./app");
 
-const { app: appConfig } = require("./config");
+const { app: appConfig, logger } = require("./config");
 
-app.listen(appConfig.port, () => {
-    console.log("");
+const server = app.listen(appConfig.port, () => {
+    logger.info({
+        service: appConfig.serviceName,
+        environment: appConfig.environment,
+        version: appConfig.version,
+        port: appConfig.port
+    }, "Application started successfully.");
+});
 
-    console.log("========================================");
-    console.log(`${appConfig.serviceName}`);
-    console.log("========================================");
-    console.log(`Environment : ${appConfig.environment}`);
-    console.log(`Port        : ${appConfig.port}`);
-    console.log(`Version     : ${appConfig.version}`);
-    console.log("========================================");
-    console.log("");
+server.on("error", (error) => {
+    logger.fatal(error, "Failed to start application.");
+    process.exit(1);
 });
