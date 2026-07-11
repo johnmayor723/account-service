@@ -1,5 +1,4 @@
 const { app } = require("../../config");
-
 const { success } = require("../../responses/api.response");
 
 const health = async (req, res) => {
