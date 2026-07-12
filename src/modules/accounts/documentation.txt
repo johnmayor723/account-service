@@ -102,3 +102,38 @@ Dependencies
 Future Dependencies
 
 - Fineract Client
+
+
+==================================================
+ACC-004
+Validation Layer
+==================================================
+
+Validators
+
+✓ create-mapping.validator.js
+
+✓ validate-account.validator.js
+
+✓ name-enquiry.validator.js
+
+Responsibilities
+
+- Reject malformed requests
+- Validate account numbers
+- Validate email addresses
+- Validate phone numbers
+- Ensure required fields are present
+
+==================================================
+ACC-005
+Controller Layer
+==================================================
+
+Responsibilities
+
+- Receive HTTP requests
+- Call the service layer
+- Return standardized API responses
+- No business logic
+- No MongoDB queries
