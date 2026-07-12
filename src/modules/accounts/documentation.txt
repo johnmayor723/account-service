@@ -46,3 +46,38 @@ ACC-008 Internal APIs
 ACC-009 Unit Tests
 
 ACC-010 Integration Tests
+
+==================================================
+ACC-002
+Repository Layer
+==================================================
+
+Purpose
+
+Encapsulates all MongoDB operations.
+
+Methods
+
+create()
+
+findByAccountNumber()
+
+findByFineractAccountId()
+
+findByClientId()
+
+findByEmail()
+
+findByPhoneNumber()
+
+update()
+
+delete()
+
+existsByAccountNumber()
+
+existsByFineractAccountId()
+
+existsByEmail()
+
+existsByPhoneNumber()
