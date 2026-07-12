@@ -3,7 +3,9 @@ require("dotenv").config();
 const required = [
     "SERVICE_NAME",
     "PORT",
-    "NODE_ENV"
+    "NODE_ENV",
+    "MONGODB_URI",
+    "MONGODB_DATABASE"
 ];
 
 const missing = required.filter(
@@ -42,7 +44,12 @@ const config = {
 
     isProduction: process.env.NODE_ENV === "production",
 
-    isTest: process.env.NODE_ENV === "test"
+    isTest: process.env.NODE_ENV === "test",
+
+    mongo: {
+    uri: process.env.MONGODB_URI,
+    database: process.env.MONGODB_DATABASE || "banking_platform"
+},
 };
 
 module.exports = config;

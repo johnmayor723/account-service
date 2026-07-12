@@ -1,7 +1,9 @@
-const appConfig = require("./app.config");
+const app = require("./app.config");
 const logger = require("./logger.config");
+const database = require("./database.config");
 
 module.exports = {
-    app: appConfig,
-    logger
+    app,
+    logger,
+    database
 };
