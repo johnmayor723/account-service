@@ -1,5 +1,5 @@
 {
-  "name": "banking-platform-template",
+  "name": "account-service",
   "version": "1.0.0",
   "main": "src/server.js",
   "type": "commonjs",
@@ -22,7 +22,7 @@
   ],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Account Mapping and Validation Service",
   "_moduleAliases": {
     "@config": "src/config",
     "@controllers": "src/controllers",

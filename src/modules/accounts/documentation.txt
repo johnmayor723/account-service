@@ -1,0 +1,48 @@
+==================================================
+ACCOUNT SERVICE
+==================================================
+
+Module:
+Account
+
+Description:
+Maintains the relationship between customer NUBAN
+account numbers and Apache Fineract account IDs.
+
+Responsibilities
+
+- Account Number Mapping
+- Account Validation
+- Name Enquiry
+- Internal Account Lookup
+- Fineract Mapping
+- Account Synchronization
+
+Collection
+
+account_mappings
+
+Current Phase
+
+ACC-001
+✓ Account Mapping Schema
+
+Upcoming
+
+ACC-002 Repository
+
+ACC-003 Service
+
+ACC-004 Controller
+
+ACC-005 Routes
+
+ACC-006 Validation Endpoint
+
+ACC-007 Name Enquiry
+
+ACC-008 Internal APIs
+
+ACC-009 Unit Tests
+
+ACC-010 Integration Tests
