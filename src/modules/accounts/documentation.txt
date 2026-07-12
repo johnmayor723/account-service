@@ -81,3 +81,24 @@ existsByFineractAccountId()
 existsByEmail()
 
 existsByPhoneNumber()
+
+==================================================
+ACC-003
+Service Layer
+==================================================
+
+Responsibilities
+
+- Business Rules
+- Account Validation
+- Name Enquiry
+- Mapping Creation
+- Internal Lookups
+
+Dependencies
+
+- Account Repository
+
+Future Dependencies
+
+- Fineract Client
