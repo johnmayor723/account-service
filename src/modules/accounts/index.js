@@ -1,3 +1,1 @@
-module.exports = {
-    AccountMapping: require("./account.model")
-};
+module.exports = require("./account.routes");

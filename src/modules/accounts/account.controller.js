@@ -99,6 +99,22 @@ const getByFineractAccountId = async (req, res) => {
     });
 
 };
+/**
+ * Synchronize account from Fineract.
+ */
+const syncAccount = async (req, res) => {
+
+    const account =
+        await accountService.syncAccount(
+            req.body.fineractAccountId
+        );
+
+    return success(res, {
+        message: "Account synchronized successfully.",
+        data: account
+    });
+
+};
 
 module.exports = {
 
@@ -112,6 +128,8 @@ module.exports = {
 
     getByClientId,
 
-    getByFineractAccountId
+    getByFineractAccountId,
+
+    syncAccount
 
 };

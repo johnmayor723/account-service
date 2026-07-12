@@ -5,7 +5,9 @@ const required = [
     "PORT",
     "NODE_ENV",
     "MONGODB_URI",
-    "MONGODB_DATABASE"
+    "MONGODB_DATABASE",
+    "FINERACT_URL",
+    "FINERACT_BEARER_TOKEN"
 ];
 
 const missing = required.filter(
@@ -50,6 +52,12 @@ const config = {
     uri: process.env.MONGODB_URI,
     database: process.env.MONGODB_DATABASE || "banking_platform"
 },
+
+    fineract: {
+        url: process.env.FINERACT_URL,
+        bearerToken: process.env.FINERACT_BEARER_TOKEN
+    }
+
 };
 
 module.exports = config;

@@ -137,3 +137,25 @@ Responsibilities
 - Return standardized API responses
 - No business logic
 - No MongoDB queries
+
+
+==================================================
+ACC-006
+Routes
+==================================================
+
+Public
+
+POST /accounts/validate
+
+GET /accounts/name-enquiry/:accountNumber
+
+Internal
+
+POST /internal/accounts
+
+GET /internal/accounts/:accountNumber
+
+GET /internal/accounts/client/:clientId
+
+GET /internal/accounts/fineract/:fineractAccountId

@@ -7,6 +7,9 @@ module.exports = {
         require("./validate-account.validator"),
 
     nameEnquiry:
-        require("./name-enquiry.validator")
+        require("./name-enquiry.validator"),
+    
+    syncAccount:
+    require("./sync-account.validator")    
 
 };

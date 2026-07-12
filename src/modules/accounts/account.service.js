@@ -5,6 +5,10 @@ const {
     NotFoundError
 } = require("../../errors");
 
+const {
+    adapter
+} = require("../../integrations/fineract");
+
 class AccountService {
 
     /**
@@ -106,7 +110,33 @@ class AccountService {
             status: account.status
         };
     }
+    /**
+ * Synchronize account mapping from Fineract.
+ */
+async syncAccount(fineractAccountId) {
 
+    const account =
+        await adapter.getAccount(
+            fineractAccountId
+        );
+
+    const exists =
+        await accountRepository.existsByFineractAccountId(
+            fineractAccountId
+        );
+
+    if (!exists) {
+
+        return accountRepository.create(account);
+
+    }
+
+    return accountRepository.updateByFineractAccountId(
+        fineractAccountId,
+        account
+    );
+
+}
     /**
      * Validate account ownership.
      */

@@ -10,7 +10,7 @@ class AccountRepository {
     }
 
     /**
-     * Find by NUBAN account number.
+     * Find by account number.
      */
     async findByAccountNumber(accountNumber) {
         return AccountMapping.findOne({
@@ -19,7 +19,7 @@ class AccountRepository {
     }
 
     /**
-     * Find by Fineract savings account ID.
+     * Find by Fineract account ID.
      */
     async findByFineractAccountId(fineractAccountId) {
         return AccountMapping.findOne({
@@ -28,7 +28,7 @@ class AccountRepository {
     }
 
     /**
-     * Find by Fineract client ID.
+     * Find all accounts belonging to a client.
      */
     async findByClientId(clientId) {
         return AccountMapping.find({
@@ -55,7 +55,7 @@ class AccountRepository {
     }
 
     /**
-     * Update an account mapping by ID.
+     * Update by MongoDB ID.
      */
     async update(id, updateData) {
         return AccountMapping.findByIdAndUpdate(
@@ -69,14 +69,33 @@ class AccountRepository {
     }
 
     /**
-     * Delete an account mapping by ID.
+     * Update by Fineract Account ID.
+     */
+    async updateByFineractAccountId(
+        fineractAccountId,
+        updateData
+    ) {
+        return AccountMapping.findOneAndUpdate(
+            {
+                fineractAccountId
+            },
+            updateData,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+    }
+
+    /**
+     * Delete by MongoDB ID.
      */
     async delete(id) {
         return AccountMapping.findByIdAndDelete(id);
     }
 
     /**
-     * Check whether an account number already exists.
+     * Check if account number exists.
      */
     async existsByAccountNumber(accountNumber) {
         return AccountMapping.exists({
@@ -85,7 +104,7 @@ class AccountRepository {
     }
 
     /**
-     * Check whether a Fineract account already exists.
+     * Check if Fineract account exists.
      */
     async existsByFineractAccountId(fineractAccountId) {
         return AccountMapping.exists({
@@ -94,7 +113,7 @@ class AccountRepository {
     }
 
     /**
-     * Check whether an email already exists.
+     * Check if email exists.
      */
     async existsByEmail(email) {
         return AccountMapping.exists({
@@ -103,7 +122,7 @@ class AccountRepository {
     }
 
     /**
-     * Check whether a phone number already exists.
+     * Check if phone exists.
      */
     async existsByPhoneNumber(phoneNumber) {
         return AccountMapping.exists({
