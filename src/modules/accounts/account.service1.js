@@ -156,29 +156,22 @@ class AccountService {
          * Preserve generated account number.
          */
         let accountNumber;
-        let nuban;
 
         if (existing) {
 
             accountNumber =
                 existing.accountNumber;
-            nuban = existing.nuban    
 
         } else {
 
             accountNumber =
                 await generator.generate();
 
-             nuban = accountNumber
-                  
-
         }
 
         const payload = {
 
             accountNumber,
-
-            nuban,
 
             fineractAccountId:
                 account.id,

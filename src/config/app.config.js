@@ -7,7 +7,8 @@ const required = [
     "MONGODB_URI",
     "MONGODB_DATABASE",
     "FINERACT_URL",
-    "FINERACT_BEARER_TOKEN"
+    "FINERACT_TENANT",
+    "FINERACT_BASIC_AUTH"
 ];
 
 const missing = required.filter(
@@ -15,23 +16,29 @@ const missing = required.filter(
 );
 
 if (missing.length > 0) {
+
     console.error("");
 
     console.error("========================================");
     console.error("CONFIGURATION ERROR");
     console.error("========================================");
+
     console.error("");
 
     missing.forEach((item) => {
+
         console.error(`Missing environment variable: ${item}`);
+
     });
 
     console.error("");
 
     process.exit(1);
+
 }
 
 const config = {
+
     serviceName: process.env.SERVICE_NAME,
 
     version: process.env.SERVICE_VERSION || "1.0.0",
@@ -42,20 +49,31 @@ const config = {
 
     apiPrefix: process.env.API_PREFIX || "/api/v1",
 
-    isDevelopment: process.env.NODE_ENV === "development",
+    isDevelopment:
+        process.env.NODE_ENV === "development",
 
-    isProduction: process.env.NODE_ENV === "production",
+    isProduction:
+        process.env.NODE_ENV === "production",
 
-    isTest: process.env.NODE_ENV === "test",
+    isTest:
+        process.env.NODE_ENV === "test",
 
     mongo: {
-    uri: process.env.MONGODB_URI,
-    database: process.env.MONGODB_DATABASE || "banking_platform"
-},
+
+        uri: process.env.MONGODB_URI,
+
+        database: process.env.MONGODB_DATABASE
+
+    },
 
     fineract: {
+
         url: process.env.FINERACT_URL,
-        bearerToken: process.env.FINERACT_BEARER_TOKEN
+
+        tenant: process.env.FINERACT_TENANT,
+
+        basicAuth: process.env.FINERACT_BASIC_AUTH
+
     }
 
 };

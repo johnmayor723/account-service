@@ -3,56 +3,60 @@ const client = require("./fineract.client");
 class FineractAdapter {
 
     /**
-     * Fetch account information required by the
+     * Retrieve account information from Fineract.
+     *
+     * This adapter hides the fact that we make two
+     * Fineract API calls (Savings Account + Client)
+     * and returns one normalized object to the
      * Account Service.
      */
-    async getAccount(accountId) {
+    async getAccount(fineractAccountId) {
 
         const savings =
-            await client.getSavingsAccount(accountId);
+            await client.getSavingsAccount(
+                fineractAccountId
+            );
 
         const customer =
-            await client.getClient(savings.clientId);
+            await client.getClient(
+                savings.clientId
+            );
 
         return {
 
-            fineractAccountId: String(savings.id),
+            /**
+             * Savings Account
+             */
+            id: String(savings.id),
 
+            accountNo: savings.accountNo,
+
+            /**
+             * Client
+             */
             clientId: String(customer.id),
 
-            accountNumber:
-                savings.accountNo,
+            displayName:
+                customer.displayName,
 
-            accountType:
-                (savings.depositType?.value || "SAVINGS")
-                    .toUpperCase(),
-
-            currency:
-                savings.currency?.code || "NGN",
-
-            status:
-                savings.status?.active
-                    ? "ACTIVE"
-                    : "INACTIVE",
-
-            firstName:
+            firstname:
                 customer.firstname,
 
-            middleName:
+            middlename:
                 customer.middlename || null,
 
-            lastName:
+            lastname:
                 customer.lastname,
 
-            accountName:
-                `${customer.firstname} 
-${customer.lastname}`.toUpperCase(),
+            mobileNo:
+                customer.mobileNo || null,
 
-            phoneNumber:
-                customer.mobileNo,
+            emailAddress:
+                customer.emailAddress || null,
 
-            email:
-                customer.emailAddress
+            active:
+                customer.active === true
+
         };
 
     }

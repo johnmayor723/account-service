@@ -1,18 +1,28 @@
 const mongoose = require("mongoose");
 
-const AccountMappingSchema = new mongoose.Schema(
+const AccountSchema = new mongoose.Schema(
+
     {
+
         /**
-         * NUBAN Account Number
+         * Customer visible account number
          */
         accountNumber: {
             type: String,
             required: true,
             unique: true,
-            index: true,
-            trim: true
+            index: true
         },
-
+         nuban: {
+            type: String,
+            required: true,
+            unique: true,
+            index: true
+        },
+         /**
+         * Customer visible account number
+         */
+     
         /**
          * Fineract Savings Account ID
          */
@@ -20,6 +30,15 @@ const AccountMappingSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true,
+            index: true
+        },
+
+        /**
+         * Fineract Account Number
+         */
+        fineractAccountNumber: {
+            type: String,
+            required: true,
             index: true
         },
 
@@ -32,94 +51,56 @@ const AccountMappingSchema = new mongoose.Schema(
             index: true
         },
 
-        /**
-         * Customer Name
-         */
+        displayName: {
+            type: String,
+            required: true
+        },
+
         firstName: {
             type: String,
-            required: true,
-            trim: true
+            default: null
         },
 
         middleName: {
             type: String,
-            default: null,
-            trim: true
+            default: null
         },
 
         lastName: {
             type: String,
-            required: true,
-            trim: true
+            default: null
         },
 
-        /**
-         * Cached full name for fast name enquiry
-         */
-        accountName: {
-            type: String,
-            required: true,
-            uppercase: true,
-            trim: true,
-            index: true
-        },
-
-        /**
-         * Contact Information
-         */
         phoneNumber: {
             type: String,
-            required: true,
+            default: null,
             index: true
         },
 
         email: {
             type: String,
-            required: true,
+            default: null,
             lowercase: true,
-            trim: true,
             index: true
         },
 
-        /**
-         * Account Information
-         */
-        accountType: {
-            type: String,
-            enum: [
-                "SAVINGS",
-                "CURRENT",
-                "FIXED_DEPOSIT"
-            ],
-            default: "SAVINGS"
-        },
-
-        currency: {
-            type: String,
-            default: "NGN"
-        },
-
-        /**
-         * Mapping Status
-         */
         status: {
             type: String,
-            enum: [
-                "ACTIVE",
-                "INACTIVE",
-                "BLOCKED",
-                "CLOSED"
-            ],
-            default: "ACTIVE",
-            index: true
+            default: "ACTIVE"
         }
+
     },
+
     {
-        timestamps: true,
-        collection: "account_mappings"
+
+        timestamps: true
+
     }
+
 );
 
 module.exports =
-    mongoose.models.AccountMapping ||
-    mongoose.model("AccountMapping", AccountMappingSchema);
+    mongoose.model(
+        "AccountMapping",
+        AccountSchema
+    );

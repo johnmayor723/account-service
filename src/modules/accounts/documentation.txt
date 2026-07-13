@@ -159,3 +159,70 @@ GET /internal/accounts/:accountNumber
 GET /internal/accounts/client/:clientId
 
 GET /internal/accounts/fineract/:fineractAccountId
+
+
+
+=====================================================
+ACC - 007 
+Tested endpoints
+=====================================================
+
+
+1. Account Synchronization (POST)
+Endpoint: POST http://localhost:3001/accounts/internal/accounts/sync
+
+JSON
+{
+  "success": true,
+  "message": "Account synchronized successfully.",
+  "data": {
+    "_id": "6a54cb97475cf23dee706b68",
+    "accountNumber": "2043451147",
+    "nuban": "2043451147",
+    "fineractAccountId": "8",
+    "fineractAccountNumber": "easy000000008",
+    "clientId": "11",
+    "displayName": "ade ola",
+    "firstName": "ade",
+    "middleName": null,
+    "lastName": "ola",
+    "phoneNumber": "090666621067",
+    "email": "ade@2io.io",
+    "status": "ACTIVE",
+    "createdAt": "2026-07-13T11:27:19.857Z",
+    "updatedAt": "2026-07-13T11:27:19.857Z",
+    "__v": 0
+  },
+  "meta": {
+    "timestamp": "2026-07-13T11:27:20.009Z"
+  }
+}
+2. Fetch Account Details By Account Number (GET)
+Endpoint: GET http://localhost:3001/accounts/internal/accounts/2043451147
+
+JSON
+{
+  "success": true,
+  "message": "Account retrieved successfully.",
+  "data": {
+    "_id": "6a54cb97475cf23dee706b68",
+    "accountNumber": "2043451147",
+    "nuban": "2043451147",
+    "fineractAccountId": "8",
+    "fineractAccountNumber": "easy000000008",
+    "clientId": "11",
+    "displayName": "ade ola",
+    "firstName": "ade",
+    "middleName": null,
+    "lastName": "ola",
+    "phoneNumber": "090666621067",
+    "email": "ade@2io.io",
+    "status": "ACTIVE",
+    "createdAt": "2026-07-13T11:27:19.857Z",
+    "updatedAt": "2026-07-13T11:27:19.857Z",
+    "__v": 0
+  },
+  "meta": {
+    "timestamp": "2026-07-13T11:30:23.331Z"
+  }
+}
