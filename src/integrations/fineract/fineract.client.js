@@ -128,6 +128,40 @@ async getClient(clientId) {
 
 }
 
+/**
+ * Get Client Accounts
+ *
+ * Fineract's client-accounts-summary endpoint.
+ * Returns { savingsAccounts, loanAccounts, ... }.
+ */
+async getClientAccounts(clientId) {
+
+    const { data } = await client.get(
+        `/clients/${clientId}/accounts?tenantIdentifier=${app.fineract.tenant}`
+    );
+
+    return data;
+
+}
+
+/**
+ * Get Savings Account Transactions
+ *
+ * Fineract does not expose a standalone GET transactions
+ * endpoint (that path only accepts POST for transaction
+ * commands). Transaction history is embedded on the savings
+ * account itself via the "transactions" association.
+ */
+async getSavingsTransactions(accountId) {
+
+    const { data } = await client.get(
+        `/savingsaccounts/${accountId}?associations=transactions&tenantIdentifier=${app.fineract.tenant}`
+    );
+
+    return data.transactions || [];
+
+}
+
 }
 
 module.exports = new FineractClient();

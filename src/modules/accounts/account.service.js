@@ -270,6 +270,11 @@ class AccountService {
                 account.phoneNumber ===
                     phoneNumber
 
+                &&
+
+                account.status ===
+                    "ACTIVE"
+
         };
 
     }
