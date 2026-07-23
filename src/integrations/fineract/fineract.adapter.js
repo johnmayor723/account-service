@@ -61,6 +61,48 @@ class FineractAdapter {
 
     }
 
+    /**
+     * Retrieve the balance/status summary for a savings account,
+     * normalized for customer-facing display. Unlike getAccount(),
+     * this only needs the savings account resource itself - balance,
+     * currency, status, and product name all live on it directly.
+     */
+    async getAccountSummary(fineractAccountId) {
+
+        const savings =
+            await client.getSavingsAccount(
+                fineractAccountId
+            );
+
+        return {
+
+            productName:
+                savings.savingsProductName || null,
+
+            accountType:
+                (savings.depositType && savings.depositType.value) ||
+                savings.savingsProductName ||
+                null,
+
+            status:
+                (savings.status && savings.status.value) || null,
+
+            active:
+                Boolean(savings.status && savings.status.active),
+
+            currency:
+                (savings.currency && savings.currency.code) || null,
+
+            ledgerBalance:
+                (savings.summary && savings.summary.accountBalance) ?? null,
+
+            availableBalance:
+                (savings.summary && savings.summary.availableBalance) ?? null
+
+        };
+
+    }
+
 }
 
 module.exports = new FineractAdapter();

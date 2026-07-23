@@ -9,7 +9,8 @@ const required = [
     "FINERACT_URL",
     "FINERACT_TENANT",
     "FINERACT_BASIC_AUTH",
-    "INTERNAL_SERVICE_TOKEN"
+    "INTERNAL_SERVICE_TOKEN",
+    "JWT_SECRET"
 ];
 
 const missing = required.filter(
@@ -86,7 +87,13 @@ const config = {
 
     },
 
-    internalServiceToken: process.env.INTERNAL_SERVICE_TOKEN
+    internalServiceToken: process.env.INTERNAL_SERVICE_TOKEN,
+
+    jwt: {
+
+        secret: process.env.JWT_SECRET
+
+    }
 
 };
 

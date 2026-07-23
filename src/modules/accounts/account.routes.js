@@ -6,6 +6,8 @@ const validate = require("../../middleware/validation.middleware");
 
 const internalAuth = require("../../middleware/internal-auth.middleware");
 
+const authenticate = require("../../middleware/authenticate.middleware");
+
 const {
     createMapping,
     validateAccount,
@@ -39,6 +41,22 @@ router.get(
     nameEnquiry,
     validate,
     controller.nameEnquiry
+);
+
+/*
+|--------------------------------------------------------------------------
+| Customer APIs (Bearer JWT - the authenticated Internet Banking user)
+|--------------------------------------------------------------------------
+*/
+
+/**
+ * Canonical customer-facing account endpoint - every account
+ * owned by the authenticated customer.
+ */
+router.get(
+    "/accounts/me",
+    authenticate,
+    controller.getMyAccounts
 );
 
 /*

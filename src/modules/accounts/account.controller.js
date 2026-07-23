@@ -67,6 +67,27 @@ const getByAccountNumber = async (req, res) => {
 };
 
 /**
+ * Get My Accounts
+ *
+ * Canonical customer-facing account endpoint - every account
+ * owned by the authenticated customer, enriched with live
+ * balance/status from Fineract.
+ */
+const getMyAccounts = async (req, res) => {
+
+    const accounts =
+        await accountService.getMyAccounts(
+            req.user.clientId
+        );
+
+    return success(res, {
+        message: "Accounts retrieved successfully.",
+        data: accounts
+    });
+
+};
+
+/**
  * Get By Client ID
  */
 const getByClientId = async (req, res) => {
@@ -123,6 +144,8 @@ module.exports = {
     validateAccount,
 
     nameEnquiry,
+
+    getMyAccounts,
 
     getByAccountNumber,
 

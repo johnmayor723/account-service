@@ -233,6 +233,71 @@ class AccountService {
     }
 
     /**
+     * Get every account owned by the authenticated customer,
+     * enriched with live balance/status from Fineract. This is
+     * the canonical account endpoint for the Internet Banking UI.
+     *
+     * The first account is marked primary - there is no stored
+     * primary-account preference anywhere in the platform today,
+     * so this is a computed convention, not a persisted field.
+     */
+    async getMyAccounts(clientId) {
+
+        const mappings =
+            await accountRepository.findByClientId(clientId);
+
+        return Promise.all(
+
+            mappings.map(async (mapping, index) => {
+
+                let summary = null;
+
+                try {
+
+                    summary =
+                        await fineract.getAccountSummary(
+                            mapping.fineractAccountId
+                        );
+
+                } catch (error) {
+
+                    summary = null;
+
+                }
+
+                return {
+
+                    accountNumber: mapping.accountNumber,
+
+                    accountType:
+                        summary?.accountType || null,
+
+                    status:
+                        summary?.status || mapping.status,
+
+                    currency:
+                        summary?.currency || null,
+
+                    ledgerBalance:
+                        summary?.ledgerBalance ?? null,
+
+                    availableBalance:
+                        summary?.availableBalance ?? null,
+
+                    productName:
+                        summary?.productName || null,
+
+                    isPrimary: index === 0
+
+                };
+
+            })
+
+        );
+
+    }
+
+    /**
      * Validate ownership.
      */
     async validateOwnership({
