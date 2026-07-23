@@ -8,7 +8,8 @@ const required = [
     "MONGODB_DATABASE",
     "FINERACT_URL",
     "FINERACT_TENANT",
-    "FINERACT_BASIC_AUTH"
+    "FINERACT_BASIC_AUTH",
+    "INTERNAL_SERVICE_TOKEN"
 ];
 
 const missing = required.filter(
@@ -72,9 +73,20 @@ const config = {
 
         tenant: process.env.FINERACT_TENANT,
 
-        basicAuth: process.env.FINERACT_BASIC_AUTH
+        basicAuth: process.env.FINERACT_BASIC_AUTH,
 
-    }
+        /**
+         * Fineract sandboxes commonly run with a self-signed
+         * certificate, so this defaults to false (matching prior
+         * hardcoded behavior). Set to "true" once Fineract is
+         * reachable with a certificate that actually validates.
+         */
+        rejectUnauthorized:
+            process.env.FINERACT_TLS_REJECT_UNAUTHORIZED === "true"
+
+    },
+
+    internalServiceToken: process.env.INTERNAL_SERVICE_TOKEN
 
 };
 

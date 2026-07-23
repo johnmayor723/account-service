@@ -7,7 +7,7 @@ const customerModule = require("../modules/customer");
 const router = express.Router();
 
 router.use("/", healthModule);
-router.use("/accounts", accountModule);
-router.use("/accounts", customerModule);
+router.use("/", accountModule);
+router.use("/", customerModule);
 
 module.exports = router;

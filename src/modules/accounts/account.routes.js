@@ -4,6 +4,8 @@ const controller = require("./account.controller");
 
 const validate = require("../../middleware/validation.middleware");
 
+const internalAuth = require("../../middleware/internal-auth.middleware");
+
 const {
     createMapping,
     validateAccount,
@@ -50,6 +52,7 @@ router.get(
  */
 router.post(
     "/internal/accounts",
+    internalAuth,
     createMapping,
     validate,
     controller.createMapping
@@ -60,6 +63,7 @@ router.post(
  */
 router.get(
     "/internal/accounts/:accountNumber",
+    internalAuth,
     controller.getByAccountNumber
 );
 
@@ -68,6 +72,7 @@ router.get(
  */
 router.get(
     "/internal/accounts/client/:clientId",
+    internalAuth,
     controller.getByClientId
 );
 
@@ -76,6 +81,7 @@ router.get(
  */
 router.get(
     "/internal/accounts/fineract/:fineractAccountId",
+    internalAuth,
     controller.getByFineractAccountId
 );
 
@@ -84,6 +90,7 @@ router.get(
  */
 router.post(
     "/internal/accounts/sync",
+    internalAuth,
     syncAccount,
     validate,
     controller.syncAccount
